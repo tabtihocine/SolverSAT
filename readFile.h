@@ -5,9 +5,7 @@
 #include <fstream>
 #include <iostream>
 
-
 using namespace std;
-
 
 vector<int> readFile(ifstream& fichier , vector<vector<int>>& CNF);
 
