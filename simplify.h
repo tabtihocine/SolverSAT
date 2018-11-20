@@ -7,5 +7,5 @@
 
 using namespace std;
 
-void simplify(vector< vector<int> >& CNF, int x);
+vector<vector<int>> simplify(vector< vector<int> >& CNF, int x);
 #endif  

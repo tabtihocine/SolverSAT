@@ -7,6 +7,6 @@
 
 using namespace std;
 
-int readFile(vector<int>& ocurVariable);
+int pick(vector<int>& ocurVariable);
 
 #endif  
