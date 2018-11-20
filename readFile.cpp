@@ -35,7 +35,7 @@ vector<int> readFile(ifstream& fichier , vector<vector<int>>& CNF)
 
                 clause.push_back(literal); 
                 index=abs(literal);
-                ocurVariable.at(index)+=1;
+                ocurVariable.at(index)++;
                 fichier >> literal; 
 
             }  

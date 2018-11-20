@@ -2,59 +2,26 @@
 using namespace std;
 
 
-vector<vector<int>>simplify(vector<vector<int>>& CNF, int literal){
+vector<vector<int>> simplify(vector< vector<int> >& cnf, int x){
+    vector<vector<int>> phi=cnf;
 
-vector<vector<int>> CNFprime = CNF;
-
-	for(int i = 0; i<=CNFprime.size()-1 ; i++){
+	for(int i = 0; i <= (phi.size() - 1); i++){
 		int j = 0;
-		while(j <= CNFprime[i].size()-1 && !CNFprime[i].empty()){
-			if(CNFprime[i].at(j) == literal){
-                // suprimer la clause ou apparai le literal choisi 
-				CNFprime.erase(CNFprime.begin()+i);
-				break;
+        
+		while(j <= (phi[i].size() - 1) && !phi[i].empty()){
+			if(phi[i].at(j) == x){
+				phi.erase(phi.begin()+i);
+                i--;
 			}
-			else {if(CNFprime[i].at(j) == (literal*-1)){
-                // suprimé le litetral choisi
-				CNFprime[i].erase((CNFprime[i].begin())+j);
-				break;
+			else if(phi[i].at(j) == (x * -1)){
+				phi[i].erase((phi[i].begin())+j);	
 			}
-            }
+			//else{}
 			j++;
 		}
-		if(CNFprime.empty())
+		if(phi.empty())
 			break;
 	}
 
-    return CNFprime;
+    return phi; 
 }
-
-
-/*
-vector<vector<int>> simplify(vector< vector<int> >& CNF, int x){
-
-vector<vector<int>>CNFprime= CNF;
-
-for(int i=0 ; i<CNFprime.size() ; i++ ){
-    for(int j=0 ; j<CNFprime[i].size()-1 ;j++){
-        if(!CNFprime[i].empty()){
-             if(CNFprime[i].at(j)==x){
-
-            CNFprime.erase(CNFprime.begin()+j);
-            break;
-            
-        }else{
-
-            if(CNF[i].at(j)==(x*-1)){
-
-                CNFprime[i].erase(CNFprime[i].begin()+j);
-                break;
-            }
-        }
-        }else{
-            break;
-        }
-    }
-}
-return CNFprime; 
-}*/

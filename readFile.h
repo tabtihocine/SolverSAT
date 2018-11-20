@@ -7,6 +7,6 @@
 
 using namespace std;
 
-vector<int> readFile(ifstream& fichier , vector<vector<int>>& CNF);
+vector<int> readFile(ifstream& fichier , vector<vector<int>>&CNF);
 
 #endif  
