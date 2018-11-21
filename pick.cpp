@@ -17,7 +17,6 @@ int pick(vector<int>& ocurVariable){
             
         }
     }
-
     ocurVariable[literal]=0; 
 
     return literal;

@@ -13,29 +13,10 @@ int main(int argc, char const *argv[])
    }
 
     ifstream fichier(argv[1] , ios::in); 
-
     vector<vector<int>> phi;
-    vector<int> occurenceVar = readFile(fichier,phi); 
+    vector<int> variable = readFile(fichier,phi); 
 
-     for (int i=0 ; i<phi.size();i++){
-         for (int j=0 ; j<phi[i].size();j++){
-             cout << phi[i][j]<< " ";
-         }
-         cout << endl;
-
-     }
-    int literalChosed = pick(occurenceVar); 
-    cout<< "le literal est : " << literalChosed<< endl;
-
-    vector<vector<int>> phiPrim = simplify(phi,literalChosed); 
-
-    for (int i=0 ; i<phiPrim.size();i++){
-         for (int j=0 ; j<phiPrim[i].size();j++){
-             cout << phiPrim[i][j]<< " ";
-         }
-         cout << endl;
-     }
-    
+     
     return 0;
 }
 
