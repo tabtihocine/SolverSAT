@@ -14,8 +14,7 @@ int pick(vector<int>& ocurVariable){
         if(maxOcur<ocurVariable[i]){
             maxOcur=ocurVariable[i];
             literal=i;
-            //Pour éviter de choisir ce litéral une nouvelle fois on le met a zero
-            ocurVariable[i]=0;
+            
             
         }
     }
