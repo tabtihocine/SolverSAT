@@ -1,6 +1,8 @@
 all: SAT
-SAT: SAT.o readFile.o pick.o simplify.o 
-	g++ SAT.o readFile.o pick.o simplify.o -o SAT
+SAT: SAT.o readFile.o pick.o simplify.o backtracking.o
+	g++ SAT.o readFile.o pick.o simplify.o backtracking.o -o SAT
+backtracking.o: backtracking.cpp
+	g++ -c backtracking.cpp 
 SAT.o: SAT.cpp 
 	g++ -c SAT.cpp
 readFile.o: readFile.cpp 

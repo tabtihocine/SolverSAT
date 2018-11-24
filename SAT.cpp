@@ -1,7 +1,5 @@
 #include "readFile.h"
-#include "pick.h"
-#include "simplify.h"
-
+#include "backtracking.h"
 using namespace std; 
 
 int main(int argc, char const *argv[])
@@ -14,9 +12,20 @@ int main(int argc, char const *argv[])
 
     ifstream fichier(argv[1] , ios::in); 
     vector<vector<int>> phi;
+    vector<int> model;
     vector<int> variable = readFile(fichier,phi); 
+    
+    bool sat = backtracking(phi , variable);
+     if(sat){
+         cout<< "s AAAAAASATISFIABLE" << endl ;
 
-     
+     }else {
+          cout<< "s UNSATISFIABLE" << endl ;
+     }
+
+
+
+   
     return 0;
 }
 

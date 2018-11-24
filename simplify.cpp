@@ -23,5 +23,5 @@ vector<vector<int>> simplify(vector< vector<int> >& cnf, int x){
 			break;
 	}
 
-    return phi; 
+   return phi; 
 }
