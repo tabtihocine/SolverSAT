@@ -9,5 +9,6 @@
 using namespace std;
 
 bool backtracking(vector<vector<int>>& CNF ,vector<int>& variable , vector<int>& model);
+bool hasEmptyClause (vector<vector<int>>& cnf); 
 
 #endif  

@@ -19,12 +19,12 @@ int main(int argc, char const *argv[])
     bool SAT = backtracking(phi, variable, model); 
     if(SAT){
        cout << "s SATISFIABLE" << endl;
-       /*cout<<" v ";
+       cout<<"v ";
        for(int i=0; i<model.size();i++){
            cout<< model[i]<< " " ; 
     
        }
-       cout<< endl ; */
+       cout<< endl ; 
     }else{
        cout << "s UNSATISFIABLE" << endl;
     }
