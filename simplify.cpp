@@ -11,10 +11,11 @@ vector<vector<int>> simplify(vector< vector<int> >& cnf, int x){
 		while(j <phi[i].size()  && !phi[i].empty()){
 			if(phi[i].at(j) == x){
 				phi.erase(phi.begin()+i);
-                i--;
+                break;
 			}
 			else if(phi[i].at(j) == -x){
-				phi[i].erase((phi[i].begin())+j);	
+				phi[i].erase((phi[i].begin())+j);
+				break;	
 			}
 			j++;
 		}

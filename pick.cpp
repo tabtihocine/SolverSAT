@@ -13,12 +13,15 @@ int pick(vector<int>& ocurVariable){
     for(int i=0 ; i<ocurVariable.size() ; i++){
         if(maxOcur<ocurVariable[i]){
             maxOcur=ocurVariable[i];
-            literal=i;
-            
-            
+            literal=i;        
         }
     }
-    ocurVariable[literal]=0; 
+
+    ocurVariable[literal]=0;
+     if(maxOcur==0){
+         literal == 0;
+              }
+
 
     return literal;
 }

@@ -1,27 +1,25 @@
 #include "backtracking.h"
 using namespace std;
 
-bool backtracking(vector<vector<int>>& phi , vector<int>& variable)
+bool backtracking(vector<vector<int>>& phi , vector<int>& variable,vector<int>&model)
 {
 
-	bool satisfaisable= true; 
+	bool satisfaisable; 
+	
 	vector<vector<int>> phiPrim;
 	vector<vector<int>> phiPrimPrim;
-	cout << "retour "<< endl; 
+
+
 	if(phi.empty())
 	{	
-		cout<< " phi vide "<< endl;
 		satisfaisable= true; 
 		return satisfaisable; 
 	}
-
-
 
 	for(int i=0 ; i<phi.size();i++)
 	{
 		if(phi[i].empty())
 		{	
-			cout<< " phi a une clause vide vide "<< endl;
 			satisfaisable=false;
 			return satisfaisable;
 		}
@@ -31,34 +29,51 @@ bool backtracking(vector<vector<int>>& phi , vector<int>& variable)
 	{
 		if(phi[i].size()==1)
 		{
-			cout<< " phi a une clause unitaire "<< endl;
 			vector<vector<int>> phiTemp = simplify(phi , phi[i][0]); 
-			cout<< "phi simple"<< endl;
-			satisfaisable= backtracking(phiTemp , variable);
-			cout << " aprés back"<< endl;
-			return satisfaisable;
-			
+			model.push_back(phi[i][0]);
+			satisfaisable= backtracking(phiTemp , variable, model);
+			return satisfaisable;	
 		}
 
+	}  
+	int literal = pick(variable); 
+	phiPrim=simplify(phi, literal); 
+	
+	if(phiPrim.empty()){
+		model.push_back(literal);
+		satisfaisable=true;
+		return satisfaisable;
+	}else{
+		satisfaisable =backtracking(phiPrim , variable , model); 
+		if(satisfaisable){
+			satisfaisable=true;
+			return satisfaisable; 
+		}else{
+			phiPrimPrim=simplify(phi, -literal); 
+			if(phiPrimPrim.empty()){
+				model.push_back(-literal);
+				satisfaisable=true;
+				return satisfaisable;
+			}else{
+				satisfaisable=backtracking(phiPrimPrim , variable , model);
+				return satisfaisable; 
+			}
+		}
 	}
 
-	  cout << " chose ======="<< endl;  
-	int literal = pick(variable); 
-	cout << " x = "<< literal<< endl;  
-	phiPrim=simplify(phi, literal); 
 
-	
-		if(backtracking(phiPrim , variable))
-	{
+/*
+	if(backtracking(phiPrim , variable, model))
+	{	
 		satisfaisable=true;
-		
 		return satisfaisable; 
 	}
 	else
 	{
 		phiPrimPrim=simplify(phi , -literal);
-		satisfaisable = backtracking(phiPrimPrim , variable);
-		return satisfaisable; 
-	}
+		satisfaisable = backtracking(phiPrimPrim , variable, model);	
+			return satisfaisable;
+	
+	}*/
 	
 }

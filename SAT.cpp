@@ -12,15 +12,22 @@ int main(int argc, char const *argv[])
 
     ifstream fichier(argv[1] , ios::in); 
     vector<vector<int>> phi;
+    vector<int> model;
     vector<int> variable = readFile(fichier,phi);
-    phi.pop_back();
-    bool SAT = backtracking(phi, variable); 
 
-   if(SAT){
+    phi.pop_back();
+    bool SAT = backtracking(phi, variable, model); 
+    if(SAT){
        cout << "s SATISFIABLE" << endl;
-   }else{
+       /*cout<<" v ";
+       for(int i=0; i<model.size();i++){
+           cout<< model[i]<< " " ; 
+    
+       }
+       cout<< endl ; */
+    }else{
        cout << "s UNSATISFIABLE" << endl;
-   }
+    }
 
     return 0;
 }
