@@ -51,6 +51,7 @@ bool backtracking(vector<vector<int>>& phi , vector<int>& variable)
 		if(backtracking(phiPrim , variable))
 	{
 		satisfaisable=true;
+		
 		return satisfaisable; 
 	}
 	else
