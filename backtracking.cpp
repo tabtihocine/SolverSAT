@@ -1,74 +1,63 @@
 #include "backtracking.h"
 using namespace std;
 
-bool backtracking(vector<vector<int>>& phi , vector<int>& variable){
+bool backtracking(vector<vector<int>>& phi , vector<int>& variable)
+{
 
-	bool satisfiable;
-	vector<vector<int>> phiPrim; 
-	vector<vector<int>> phiPrimPrim; 
-
-	if(phi.empty()){
-		satisfiable = true; 
-		return satisfiable; 
-	}
-    
-	for(int i=0 ; i<phi.size() ; i++){
-		if(phi[i].empty()){
-			satisfiable = false; 
-			return satisfiable;
-		}
+	bool satisfaisable= true; 
+	vector<vector<int>> phiPrim;
+	vector<vector<int>> phiPrimPrim;
+	cout << "retour "<< endl; 
+	if(phi.empty())
+	{	
+		cout<< " phi vide "<< endl;
+		satisfaisable= true; 
+		return satisfaisable; 
 	}
 
-	for(int i=0 ; i<phi.size() ; i++){
-		if(phi[i].size()==1){
-			vector<vector<int>> cnf = simplify(phi,phi[i].at(0));
-			satisfiable = backtracking(cnf , variable );
-			return satisfiable;
-		}
-	}
 
-	int literal = pick(variable); 
-	phiPrim=simplify(phi , literal);
 
-	if(phiPrim.empty()){
-		satisfiable=true;
-		return satisfiable;
-	} 
-	
-	if(!phiPrim.empty())
+	for(int i=0 ; i<phi.size();i++)
 	{
-		int i=0;
-		while(i<phiPrim.size())
-		{
-			if(phiPrim[i].empty())
-			{
-				phiPrimPrim= simplify(phi  , (literal)*(-1));
-				if(phiPrimPrim.empty())
-				{
-					satisfiable=true;
-					break;
-				}
-				if(!phiPrimPrim.empty())
-				{
-					int j=0; 
-					while(j<phiPrimPrim.size())
-					{
-						if(phiPrimPrim[j].empty())
-						{
-							return false; 
-						}
-						j++;  		
-					}
-					return backtracking(phiPrimPrim , variable);  
-						
-				}  
-				break;
-			}
-		 	i++;	
+		if(phi[i].empty())
+		{	
+			cout<< " phi a une clause vide vide "<< endl;
+			satisfaisable=false;
+			return satisfaisable;
 		}
-	return backtracking(phiPrim , variable); 
+	}
+
+	for(int i=0 ; i<phi.size();i++)
+	{
+		if(phi[i].size()==1)
+		{
+			cout<< " phi a une clause unitaire "<< endl;
+			vector<vector<int>> phiTemp = simplify(phi , phi[i][0]); 
+			cout<< "phi simple"<< endl;
+			satisfaisable= backtracking(phiTemp , variable);
+			cout << " aprés back"<< endl;
+			return satisfaisable;
+			
+		}
+
+	}
+
+	  cout << " chose ======="<< endl;  
+	int literal = pick(variable); 
+	cout << " x = "<< literal<< endl;  
+	phiPrim=simplify(phi, literal); 
+
 	
+		if(backtracking(phiPrim , variable))
+	{
+		satisfaisable=true;
+		return satisfaisable; 
+	}
+	else
+	{
+		phiPrimPrim=simplify(phi , -literal);
+		satisfaisable = backtracking(phiPrimPrim , variable);
+		return satisfaisable; 
 	}
 	
-	return satisfiable; 
 }
