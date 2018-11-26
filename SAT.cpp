@@ -17,6 +17,7 @@ int main(int argc, char const *argv[])
 
     phi.pop_back();
     bool SAT = backtracking(phi, variable, model); 
+    
     if(SAT){
        cout << "s SATISFIABLE" << endl;
        cout<<"v ";

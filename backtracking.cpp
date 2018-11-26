@@ -5,12 +5,10 @@ bool hasEmptyClause (vector<vector<int>>& cnf){
 	bool empty;
 	for(int i=0 ; i<cnf.size() ; i++){
 		if(cnf[i].empty()){
-			empty= true;
-		}else{
-			empty= false; 
+			return true;
 		}
 	}
-return empty;
+return false; 
 } 
 
 
@@ -37,16 +35,60 @@ bool backtracking(vector<vector<int>>& phi , vector<int>& variable,vector<int>&m
 	{
 		if(phi[i].size()==1)
 		{
-			vector<vector<int>> phiTemp = simplify(phi , phi[i][0]); 
 			model.push_back(phi[i][0]);
+			vector<vector<int>> phiTemp = simplify(phi , phi[i][0]); 
 			satisfaisable= backtracking(phiTemp , variable, model);
 			return satisfaisable;	
 		}
-
 	}
 	
+ 	int literal = pick(variable); 
+	phiPrim=simplify(phi, literal); 
+	
+	if(phiPrim.empty()){
+		model.push_back(literal);
+		satisfaisable=true;
+		return satisfaisable;
+	}else{
+		satisfaisable =backtracking(phiPrim , variable , model); 
+		if(satisfaisable){
+			satisfaisable=true;
+			return satisfaisable; 
+		}else{
+			phiPrimPrim=simplify(phi, -literal); 
+			if(phiPrimPrim.empty()){
+				model.push_back(-literal);
+				satisfaisable=true;
+				return satisfaisable;
+			}else{
+				satisfaisable=backtracking(phiPrimPrim , variable , model);
+				return satisfaisable; 
+			}
+		}
+	}
 
-	int literal = pick(variable);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*int literal = pick(variable);
 	phiPrim=simplify(phi , literal);
 
 	if(phiPrim.empty()){
@@ -76,32 +118,8 @@ bool backtracking(vector<vector<int>>& phi , vector<int>& variable,vector<int>&m
 			satisfaisable= backtracking(phiPrim,variable,model);
 			return satisfaisable;
 		}
-	}
+	}*/
 }
 
 
-/*	 
-	int literal = pick(variable); 
-	phiPrim=simplify(phi, literal); 
-	
-	if(phiPrim.empty()){
-		model.push_back(literal);
-		satisfaisable=true;
-		return satisfaisable;
-	}else{
-		satisfaisable =backtracking(phiPrim , variable , model); 
-		if(satisfaisable){
-			satisfaisable=true;
-			return satisfaisable; 
-		}else{
-			phiPrimPrim=simplify(phi, -literal); 
-			if(phiPrimPrim.empty()){
-				model.push_back(-literal);
-				satisfaisable=true;
-				return satisfaisable;
-			}else{
-				satisfaisable=backtracking(phiPrimPrim , variable , model);
-				return satisfaisable; 
-			}
-		}
-	}*/
+
