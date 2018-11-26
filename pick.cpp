@@ -10,16 +10,17 @@ int pick(vector<int>& ocurVariable){
     int maxOcur=0;
     int literal;
     
-    for(int i=0 ; i<ocurVariable.size() ; i++){
+    for(int i=0 ; i<ocurVariable.size()-1 ; i++){
+
         if(maxOcur<ocurVariable[i]){
             maxOcur=ocurVariable[i];
-            literal=i;        
+            literal=i; 
         }
     }
-
+    cout << "chosed " << literal<< endl;
     ocurVariable[literal]=0;
      if(maxOcur==0){
-         literal == 0;
+         literal = 0;
               }
 
 

@@ -1,5 +1,7 @@
 #include "readFile.h"
 #include "backtracking.h"
+#include <algorithm>
+
 using namespace std; 
 
 int main(int argc, char const *argv[])
@@ -14,16 +16,17 @@ int main(int argc, char const *argv[])
     vector<vector<int>> phi;
     vector<int> model;
     vector<int> variable = readFile(fichier,phi);
-
     phi.pop_back();
-    bool SAT = backtracking(phi, variable, model); 
-    
+    cout << " back " << endl; 
+    bool SAT = backtracking(phi, variable,model); 
+
+   // model.erase(unique(model.begin(), model.end()) ,  model.end());
+
+
     if(SAT){
        cout << "s SATISFIABLE" << endl;
-       cout<<"v ";
-       for(int i=0; i<model.size();i++){
-           cout<< model[i]<< " " ; 
-    
+       for(int i=0 ; i< model.size();i++){
+           cout << model[i] << " " ; 
        }
        cout<< endl ; 
     }else{

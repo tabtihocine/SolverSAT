@@ -8,7 +8,8 @@
 
 using namespace std;
 
-bool backtracking(vector<vector<int>>& CNF ,vector<int>& variable , vector<int>& model);
+bool backtracking(vector<vector<int>>& CNF ,vector<int>& variable,vector<int>& w);
 bool hasEmptyClause (vector<vector<int>>& cnf); 
+bool isIn(vector< int>& m , int x); 
 
 #endif  
